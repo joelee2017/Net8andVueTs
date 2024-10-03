@@ -3,12 +3,6 @@
     import HelloWorld from './components/HelloWorld.vue';
     import TheWelcome from './components/TheWelcome.vue';
     import Product from './components/Product.vue';
-
-    const activeComponent = ref('TheWelcome');
-
-    const toggleComponent = (componentName: string) => {
-        activeComponent.value = componentName;
-    };
 </script>
 
 <template>
@@ -55,31 +49,6 @@
         <router-view /> <!-- 這裡顯示路由的內容 -->
     </main>
 </template>
-<script lang="ts">
-    //import { ref } from 'vue';
-    //import HelloWorld from './components/HelloWorld.vue';
-    //import TheWelcome from './components/TheWelcome.vue';
-    //import Product from './components/Product.vue';
-
-    //const activeComponent = ref('TheWelcome');
-
-    //const toggleComponent = (componentName: string) => {
-    //    activeComponent.value = componentName;
-    //};
-
-    export default {
-        components: {
-            TheWelcome,
-            Product
-        },
-        setup() {
-            return {
-                activeComponent,
-                toggleComponent
-            };
-        }
-    };
-</script>
 <style>
     /* 添加Bootstrap的CSS */
     @import 'bootstrap/dist/css/bootstrap.css';
