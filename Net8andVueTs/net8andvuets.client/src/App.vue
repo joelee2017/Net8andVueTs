@@ -16,7 +16,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">My App</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -27,6 +27,16 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#" @click="toggleComponent('Product')">Products</a>
+                        </li>
+                    </ul>
+                </div>-->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <router-link to="/" class="nav-link">Home</router-link>
+                        </li>
+                        <li class="nav-item">
+                            <router-link to="/products" class="nav-link">Products</router-link>
                         </li>
                     </ul>
                 </div>
@@ -41,7 +51,8 @@
 
     <main>
         <!--<Product />-->
-        <component :is="activeComponent" />
+        <!--  <component :is="activeComponent" />-->
+        <router-view /> <!-- 這裡顯示路由的內容 -->
     </main>
 </template>
 <script lang="ts">
