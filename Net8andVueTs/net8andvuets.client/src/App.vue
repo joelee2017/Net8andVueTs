@@ -1,87 +1,128 @@
 <script setup lang="ts">
-    import { ref } from 'vue';
     import HelloWorld from './components/HelloWorld.vue';
     import TheWelcome from './components/TheWelcome.vue';
     import Product from './components/Product.vue';
+    import feather from 'feather-icons';
+    import { onMounted } from 'vue';
+
+    onMounted(() => {
+        feather.replace();
+    });
 </script>
 
 <template>
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">My App</a>
-                <!--<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
+    <!-- Navbar -->
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">My Dashboard</a>
+        <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#" @click="toggleComponent('TheWelcome')">Home</a>
+                            <router-link to="/" class="nav-link active" aria-current="page">
+                                <span data-feather="home"></span>
+                                Dashboard
+                            </router-link>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" @click="toggleComponent('Product')">Products</a>
-                        </li>
-                    </ul>
-                </div>-->
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <router-link to="/" class="nav-link">Home</router-link>
+                            <router-link to="/products" class="nav-link">
+                                <span data-feather="file"></span>
+                                Products
+                            </router-link>
                         </li>
                         <li class="nav-item">
-                            <router-link to="/products" class="nav-link">Products</router-link>
+                            <router-link to="/reports" class="nav-link">
+                                <span data-feather="bar-chart-2"></span>
+                                Reports
+                            </router-link>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-        <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+            </nav>
 
-        <div class="wrapper">
-            <HelloWorld msg="You did it!" />
+            <!-- Main Content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">Dashboard</h1>
+                </div>
+                <router-view></router-view> <!-- 這裡顯示路由對應的內容 -->
+            </main>
         </div>
-    </header>
-
-    <main>
-        <!--<Product />-->
-        <!--  <component :is="activeComponent" />-->
-        <router-view /> <!-- 這裡顯示路由的內容 -->
-    </main>
+    </div>
 </template>
-<style>
-    /* 添加Bootstrap的CSS */
-    @import 'bootstrap/dist/css/bootstrap.css';
-</style>
 
 <style scoped>
-    header {
-        line-height: 1.5;
-        margin-bottom: 2rem; /* 添加底部邊距，防止與內容擠在一起 */
+    .nav-link {
+        font-weight: 500;
+        color: #333;
     }
 
-    .logo {
-        display: block;
-        margin: 0 auto 2rem;
+        .nav-link .feather {
+            margin-right: 4px;
+            color: #727272;
+        }
+
+        .nav-link.active {
+            color: #007bff;
+        }
+
+            .nav-link:hover .feather,
+            .nav-link.active .feather {
+                color: inherit;
+            }
+
+    .navbar {
+        margin-bottom: 1rem;
+        margin: 0;
     }
 
-    @media (min-width: 1024px) {
-        header {
-            display: flex;
-            flex-direction: column; /* 將header的方向設為列，讓navbar和logo在不同的行 */
-            place-items: center; /* 居中對齊元素 */
-            padding-right: calc(var(--section-gap) / 2);
+    .sidebar {
+        height: 100vh;
+        padding-top: 1rem;
+    }
+
+    .container-fluid {
+        flex-grow: 1;
+    }
+
+    /* 媒體查詢 */
+    @media (max-width: 768px) {
+        .sidebar {
+            height: auto; /* 自動調整高度 */
+        }
+    }
+
+    /* 響應式設計，確保小螢幕時 navbar 和 sidebar 表現良好 */
+    @media (max-width: 767px) {
+        .navbar-toggler {
+            margin-right: 1rem; /* 調整折疊按鈕的位置，避免與標題重疊 */
         }
 
-        .logo {
-            margin: 0 2rem 0 0; /* 調整logo的邊距 */
+        .navbar-brand {
+            width: 100%;
+            text-align: center; /* 確保品牌名稱居中顯示 */
         }
 
-        header .wrapper {
-            display: flex;
-            place-items: flex-start;
-            flex-wrap: wrap;
-            justify-content: center; /* 居中wrapper中的內容 */
+        /* 讓 sidebar 在小螢幕時隱藏，通過 navbar 的摺疊按鈕顯示 */
+        #sidebarMenu {
+            top: 56px;
+        }
+
+        .main-content {
+            padding-left: 0; /* 在小螢幕下取消左邊的 margin */
+        }
+    }
+
+    @media (min-width: 768px) {
+        /* Sidebar 在較大螢幕上自動展開 */
+        .sidebar {
+            display: block;
         }
     }
 </style>
