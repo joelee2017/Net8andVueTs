@@ -82,11 +82,6 @@
         margin: 0;
     }
 
-    .sidebar {
-        height: 100vh;
-        padding-top: 1rem;
-    }
-
     .container-fluid {
         flex-grow: 1;
     }
