@@ -86,6 +86,7 @@
         flex-grow: 1;
     }
 
+
     /* 媒體查詢 */
     @media (max-width: 768px) {
         .sidebar {
@@ -110,7 +111,8 @@
         }
 
         .main-content {
-            padding-left: 0; /* 在小螢幕下取消左邊的 margin */
+            padding-left: 20px; /* 在小螢幕下取消左邊的 margin */    
+            
         }
     }
 
